@@ -1,8 +1,7 @@
-import java.util.Scanner;
-
+import usersRequest.UsersRequest;
 public class MiniCompiler {
     public static void main(String args[]){
-        Scanner in = new Scanner(System.in);
-
+        UsersRequest user = new UsersRequest();
+        user.TypeHi();
     }
 }

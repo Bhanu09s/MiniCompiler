@@ -1,4 +1,3 @@
-// File: src/tokenizer/Tokenizer.java
 package tokenizer;
 
 import java.util.ArrayList;
@@ -9,13 +8,36 @@ public class Tokenizer {
     private ArrayList<String> tokens = new ArrayList<>();
 
     /**
-     * Breaks the input string into single-character String tokens.
+     * Breaks the input string into tokens: multi-digit numbers (and decimals) plus single-char operators/brackets.
      */
     public ArrayList<String> tokenize(String str) {
         tokens.clear();
+        StringBuilder numberBuf = new StringBuilder();
+
         for (char ch : str.toCharArray()) {
-            tokens.add(String.valueOf(ch));
+            if (Character.isDigit(ch) || ch == '.') {
+                // build up a number (integer or decimal)
+                numberBuf.append(ch);
+            } else {
+                // flush any number we were building
+                if (numberBuf.length() > 0) {
+                    tokens.add(numberBuf.toString());
+                    numberBuf.setLength(0);
+                }
+                // skip whitespace
+                if (Character.isWhitespace(ch)) {
+                    continue;
+                }
+                // single-char token: operator or parenthesis
+                tokens.add(String.valueOf(ch));
+            }
         }
+
+        // flush trailing number, if any
+        if (numberBuf.length() > 0) {
+            tokens.add(numberBuf.toString());
+        }
+
         return tokens;
     }
 
@@ -27,6 +49,7 @@ public class Tokenizer {
         return p.infixTopostfix(tokens);
     }
 }
+
 
 
 

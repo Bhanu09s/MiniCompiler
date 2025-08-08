@@ -45,7 +45,7 @@ public class PostFix {
                 // pop higher-or-equal precedence operators
                 while (!stack.isEmpty()
                        && isOperator(stack.peek())
-                       && checkPrecidence(token, stack.peek())) {
+                       && checkPrecidence(stack.peek(),token)) {
                     output.add(stack.pop());
                 }
                 stack.push(token);

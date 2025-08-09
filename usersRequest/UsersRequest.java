@@ -1,6 +1,7 @@
 // File: src/usersRequest/UsersRequest.java
 package usersRequest;
 
+import solving.Solve;
 import tokenizer.Tokenizer;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class UsersRequest {
 
         ArrayList<String> c1 = ConvertToToken(str);
         ArrayList<String> c2 = ConvertToPostFix(c1);
+        int c3 = finalAnswer();
 
         System.out.println("Do you want to see the tokenized form of your entered expression? Y/N");
         char ch = in.next().charAt(0);
@@ -32,6 +34,9 @@ public class UsersRequest {
             }
         }
         System.out.println();
+        System.out.println();
+        System.out.println("Answer after evaluation :-");
+        System.out.println(c3);
     }
 
     private static ArrayList<String> ConvertToToken(String str) {
@@ -40,6 +45,10 @@ public class UsersRequest {
 
     private static ArrayList<String> ConvertToPostFix(ArrayList<String> ignored) {
         return token.postfix();
+    }
+
+    private static int finalAnswer(){
+        return token.Answer();
     }
 }
 

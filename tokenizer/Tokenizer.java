@@ -2,10 +2,11 @@ package tokenizer;
 
 import java.util.ArrayList;
 import postfix.PostFix;
+import solving.Solve;
 
 public class Tokenizer {
 
-    private ArrayList<String> tokens = new ArrayList<>();
+    private static ArrayList<String> tokens = new ArrayList<>();
 
     /**
      * Breaks the input string into tokens: multi-digit numbers (and decimals) plus single-char operators/brackets.
@@ -48,6 +49,16 @@ public class Tokenizer {
         PostFix p = new PostFix();
         return p.infixTopostfix(tokens);
     }
+
+    /**
+     * Final answer after evaluation
+     */
+    public int Answer() {
+        PostFix p = new PostFix();
+        ArrayList<String> postfix = p.infixTopostfix(tokens); // convert first
+        Solve s = new Solve();
+        return s.finalValue(postfix);                         // evaluate postfix
+}
 }
 
 
